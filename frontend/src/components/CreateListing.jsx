@@ -3,7 +3,6 @@ import {
   getStorage,
   uploadBytesResumable,
   ref,
-  uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
 import app from "../Firebase";
