@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getStorage,
   uploadBytesResumable,
@@ -7,11 +7,12 @@ import {
 } from "firebase/storage";
 import app from "../Firebase";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateListing = () => {
+const UpdateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const params = useParams();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
@@ -27,6 +28,8 @@ const CreateListing = () => {
     furnished: false,
     offer: false,
   });
+
+  const [listUpdated, setListUpdatedSuccess] = useState("");
 
   const [imageUploadErrors, setImageUploadErrors] = useState(false);
 
@@ -66,6 +69,36 @@ const CreateListing = () => {
   };
 
   console.log("hvghvg", formData);
+
+  useEffect(() => {
+    const listing = params.listingId;
+    console.log(listing);
+
+    const fetchlisting = async () => {
+      try {
+        let listing1 = await fetch(`/api/listing/get/${listing}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        let data = await listing1.json();
+        console.log(data);
+        if (data.success == false) {
+          console.log(data.message);
+          return;
+        }
+
+        setFormData(data);
+        setListUpdatedSuccess(data.message);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchlisting();
+  }, []);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -144,7 +177,9 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
 
-      let res = await fetch("/api/listing/create", {
+      const listing = params.listingId;
+
+      let res = await fetch(`/api/listing/update/${listing}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +196,7 @@ const CreateListing = () => {
         setError(data.message);
       }
 
-      navigate(`/listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -171,7 +206,7 @@ const CreateListing = () => {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-3xl font-semibold text-center">Create a Listing</h1>
+        <h1 className="text-3xl font-semibold text-center">Update Listing</h1>
 
         <form
           onSubmit={handleSubmit}
@@ -319,7 +354,7 @@ const CreateListing = () => {
                   max="1000000"
                   required
                   onChange={handleChange}
-                  value={formData.regulatPrice}
+                  value={formData.regularPrice}
                 />
                 <div className="flex flex-col items-center">
                   <p className="flex flex-row">
@@ -408,10 +443,13 @@ const CreateListing = () => {
                   </div>
                 );
               })}
-            <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-              {loading ? "Loading..." : "Create Listing"}
+            <button
+              disabled={loading || uploading}
+              className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            >
+              {loading ? "Loading..." : "Update Listing"}
             </button>
-
+            {<p className="text-green-700 text-lg">{listUpdated}</p>}
             {error && <p className="text-red-700 text-lg">{error}</p>}
           </div>
         </form>
@@ -420,4 +458,4 @@ const CreateListing = () => {
   );
 };
 
-export default CreateListing;
+export default UpdateListing;

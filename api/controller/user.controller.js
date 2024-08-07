@@ -1,4 +1,5 @@
 const Users = require("../models/user.model");
+const Listing = require("../models/Listing.model");
 const errorHandler = require("../utilis/error");
 const bcrypt = require("bcrypt");
 
@@ -7,8 +8,9 @@ module.exports.getUser = (req, res) => {
 };
 
 module.exports.postUpdateUser = async (req, res, next) => {
+  console.log("InSide Post Update");
   if (req.user.id !== req.params.id)
-    return next(errorHandler(401, 'You can only update your own account!'));
+    return next(errorHandler(401, "You can only update your own account!"));
   try {
     if (req.body.password) {
       req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -35,16 +37,32 @@ module.exports.postUpdateUser = async (req, res, next) => {
   }
 };
 
-
-
 module.exports.deleteUser = async (req, res, next) => {
+  console.log(req.user.id);
+  console.log(req.params.id);
   if (req.user.id !== req.params.id)
-    return next(errorHandler(401, 'You can only delete your own account!'));
+    return next(errorHandler(401, "You can only delete your own account!"));
   try {
     await Users.findByIdAndDelete(req.params.id);
-    res.clearCookie('access_token');
-    res.status(200).json('User has been deleted!');
+    res.clearCookie("access_token");
+    res.status(200).json("User has been deleted!");
   } catch (error) {
     next(error);
+  }
+};
+
+module.exports.getUserListing = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const listings = await Listing.find({ userRef: req.params.id });
+      if(!listings) res.send("Listing not Present");
+    
+      res.status(200).json(listings)
+      
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    return next(errorHandler(401, "You can only view your own listings!"));
   }
 };

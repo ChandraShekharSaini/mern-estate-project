@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 const errorHandler = require("../utilis/error.js");
 // const { maxHeaderSize } = require("http");
 
-
+console.log("router")
 module.exports.postSignup = async (req, res, next) => {
-    console.log(process.env)
+
   const { username, email, password } = req.body;
   console.log("i am here inside", password);
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -22,15 +22,15 @@ module.exports.postSignup = async (req, res, next) => {
 };
 
 module.exports.getSignin = async (req, res, next) => {
-    console.log("inside")
-    console.log(process.env);
+    
     const { email, password } = req.body;
     try {
       const validUser = await Users.findOne({ email });
+      console.log(validUser._id);
       if (!validUser) return next(errorHandler(404, 'User not found!'));
       const validPassword = bcrypt.compareSync(password, validUser.password);
       if (!validPassword) return next(errorHandler(401, 'Wrong credentials!'));
-      const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: validUser._id },process.env.JWT_SECRET);
       const { password: pass, ...rest } = validUser._doc;
       res
         .cookie('access_token', token, { httpOnly: true })

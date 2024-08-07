@@ -8,8 +8,9 @@ const verifyUser = require("../utilis/verifyuser");
 
 router.get("/", controller.getUser);
 
+
 router.post("/update/:id", verifyUser, controller.postUpdateUser);
 
 router.delete("/delete/:id", verifyUser, controller.deleteUser);
-
+router.get('/listing/:id', verifyUser, controller.getUserListing);
 module.exports = router;

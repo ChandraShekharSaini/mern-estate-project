@@ -19,7 +19,7 @@ const userSchema = new Schema({
 
   avatar:{
     type: String,
-    default: 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
+    default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToTykU2BZtuaSIFXvPHnTJsaL-Z3NgRvA2sA&s'
   }
 
 },{timestamps:true});

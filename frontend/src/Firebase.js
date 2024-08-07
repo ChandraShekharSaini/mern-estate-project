@@ -5,14 +5,15 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC_8deDzdhhfPfObARISdjxv4G1-gnrHKs",
-  authDomain: "hotel-booking-web-app-da7a1.firebaseapp.com",
-  projectId: "hotel-booking-web-app-da7a1",
-  storageBucket: "hotel-booking-web-app-da7a1.appspot.com",
-  messagingSenderId: "251843028474",
-  appId: "1:251843028474:web:f8ed7521c99af95523f043",
+  apiKey: "AIzaSyCJXHt8j5ooaWJSYNkxRgiiBlLzyWlxeto",
+  authDomain: "mern-hotel-booking-app-bd6fd.firebaseapp.com",
+  projectId: "mern-hotel-booking-app-bd6fd",
+  storageBucket: "mern-hotel-booking-app-bd6fd.appspot.com",
+  messagingSenderId: "237481907938",
+  appId: "1:237481907938:web:10599741b61a441133f0bb"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 export default app;
