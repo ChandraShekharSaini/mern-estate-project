@@ -191,12 +191,13 @@ const UpdateListing = () => {
       });
 
       const data = await res.json();
+      console.log("data", data);
       setLoading(false);
       if (data.success == false) {
         setError(data.message);
       }
 
-      navigate(`/listing/${data._id}`);
+      navigate(`/listing/${data.updateListing._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
