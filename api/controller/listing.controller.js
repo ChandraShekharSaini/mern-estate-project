@@ -58,7 +58,7 @@ module.exports.getListing = async (req, res, next) => {
   try {
     let listing = await Listing.findById({ _id: req.params.id });
     if(!listing) return next(errorHandler(401,"Listing not found"));
-
+       console.log(listing)
     res.status(200).json(listing);
   } catch (error) {
     next(error);

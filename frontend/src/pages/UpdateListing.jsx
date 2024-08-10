@@ -429,7 +429,7 @@ const UpdateListing = () => {
                     <img
                       src={urls}
                       key={index}
-                      className="rounded-sm brightness-75 w-3/5 object-contain "
+                      className="rounded-sm brightness-75 w-3/5 object-contain"
                     />
 
                     <button

@@ -12,7 +12,7 @@ router.post('/signin',controller.getSignin)
 console.log("google")
 router.post('/google',controller.postGoogleIn)
 
-router.get('/signout/:id',controller.getSignout);
+router.get('/signout/:id',controller.signOut);
 
 
 module.exports = router;

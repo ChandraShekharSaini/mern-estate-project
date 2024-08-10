@@ -9,12 +9,13 @@ import CreateListing from "./components/CreateListing"
 import UpdateListing from "./pages/UpdateListing"
 import PrivateRoute from "./components/PrivateRoute"
 import Listing from "./pages/Listing"
+
 const App = () => {
   return (
       <BrowserRouter>
       <Header/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>.
+         <Routes>
+           <Route path="/" element={Home}/>
           <Route path="/sign-in" element={<SignIn/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/about" element={<About/>}/>

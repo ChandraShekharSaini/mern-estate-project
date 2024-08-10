@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   getDownloadURL,
   getStorage,
@@ -30,8 +31,9 @@ import { Cursor } from "mongoose";
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const { logout } = useAuth0()
   const fileRef = useRef(null);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const {currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -39,10 +41,11 @@ const Profile = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [ListingError, setListingError] = useState(false);
   const [userListing, setuserListing] = useState({});
+ 
   console.log(file);
   console.log(filePerc);
   console.log(formData);
-
+ 
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -105,6 +108,8 @@ const Profile = () => {
   };
 
   const handleDeleteUser = async () => {
+
+    console.log("urrentUser._id",currentUser._id)
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
@@ -122,6 +127,8 @@ const Profile = () => {
   };
 
   const HandleSingnOut = async () => {
+    console.log("signout Id",currentUser._id)
+    // logout({logoutParams: { returnTo: window.location.origin}});
     try {
       dispatch(signOutUserStart());
       const res = await fetch(`api/auth/signout/${currentUser._id}`, {
@@ -129,17 +136,20 @@ const Profile = () => {
       });
 
       const data = await res.json();
-      if (data.success == false) {
-        dispatch(signOutUserFailure(data.message));
+      if (data.success === false) {
+       dispatch(signOutUserFailure(data.message));
+       return;
       }
 
       dispatch(signOutUserSuccess(data));
+     
     } catch (error) {
       dispatch(signOutUserFailure(error.message));
     }
   };
 
   const handleShowListing = async () => {
+   
     try {
       setListingError(false);
       const res = await fetch(`api/user/listing/${currentUser._id}`, {
@@ -150,7 +160,7 @@ const Profile = () => {
       });
 
       const data = await res.json();
-      console.log("data", data);
+      console.log("data111", data);
 
       setListingError(true);
       if (data.success == false) {
@@ -267,7 +277,8 @@ const Profile = () => {
         </span>
 
         <span
-          onClick={HandleSingnOut}
+          onClick={HandleSingnOut}  
+        
           className="text-red-700 text-lg hover:font-semibold  cursor-pointer"
         >
           Sign out
@@ -303,14 +314,15 @@ const Profile = () => {
                 <img
                   src={listing.imageUrls[0]}
                   alt="listing cover"
-                  className="  border h-127 w-128  object-cover"
+                  className="border h-127 w-128  object-cover   hover:border-8 border-solid border-slate-300  hover:scale-110"
+                
                 />
               </Link>
               <Link
                 className="text-slate-700 font-semibold  hover:underline truncate  flex-1"
                 to={`/listing/${listing._id}`}
               >
-                <p className="">{listing.name}</p>
+                <p>{listing.name}</p>
               </Link>
 
               <div className="flex flex-col items-center">

@@ -38,8 +38,9 @@ module.exports.postUpdateUser = async (req, res, next) => {
 };
 
 module.exports.deleteUser = async (req, res, next) => {
-  console.log(req.user.id);
-  console.log(req.params.id);
+   console.log("deleted")
+  console.log("deleted",req.user.id);
+  console.log("deleted",req.params.id);
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only delete your own account!"));
   try {
@@ -52,6 +53,8 @@ module.exports.deleteUser = async (req, res, next) => {
 };
 
 module.exports.getUserListing = async (req, res, next) => {
+    console.log(req.user.id)
+    console.log(req.params.id)
   if (req.user.id === req.params.id) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });
