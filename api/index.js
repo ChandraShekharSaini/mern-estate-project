@@ -1,6 +1,5 @@
 
 const express = require('express');
-const app = express();
 const PORT= process.env.PORT ||4444;
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
@@ -23,7 +22,7 @@ mongoose.connect(process.env.MONGO)
 const __dirname = path.resolve();
 
 
-
+const app = express();
 
 app.use(express.json())
 
@@ -39,7 +38,7 @@ app.use('/api/listing',require('./routes/listing.route.js'));
 app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname+'/frontend/dist/index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 })
 
 app.use((err,req,res,next)=>{
