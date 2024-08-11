@@ -6,14 +6,12 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 require('dotenv').config()
 
-// chandrashekharsaini322
+
 
 mongoose.connect(process.env.MONGO)
 .then(()=>{
-    app.listen(PORT,()=>{
-      console.log("Connected to DB")
-        console.log("http://localhost:"+PORT);
-    })
+    console.log("Connected to DB")
+    
 })
 .catch(error=>{
     console.log(error)
@@ -29,6 +27,12 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(express.urlencoded({ extended: true}))
+
+app.listen(PORT,()=>{
+      
+    console.log("http://localhost:"+PORT);
+})
+
 
 app.use('/api/user',require('./routes/user.route.js'));
 app.use('/api/auth',require('./routes/auth.route.js'))
