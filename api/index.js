@@ -4,6 +4,7 @@ const PORT= process.env.PORT ||4444;
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const path = require('path')
+const { dirname } = require('path');
 require('dotenv').config()
 
 
@@ -17,7 +18,7 @@ mongoose.connect(process.env.MONGO)
     console.log(error)
 })
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 
 const app = express();
