@@ -16,4 +16,6 @@ router.post('/update/:id',verifyUser,listingController.updateListing);
 
 router.get('/get/:id',listingController.getListing );
 
+router.get('/get', listingController.getListings);
+
 module.exports = router;

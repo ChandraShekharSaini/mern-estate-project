@@ -38,9 +38,9 @@ module.exports.postUpdateUser = async (req, res, next) => {
 };
 
 module.exports.deleteUser = async (req, res, next) => {
-   console.log("deleted")
-  console.log("deleted",req.user.id);
-  console.log("deleted",req.params.id);
+  console.log("deleted");
+  console.log("deleted", req.user.id);
+  console.log("deleted", req.params.id);
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only delete your own account!"));
   try {
@@ -53,19 +53,29 @@ module.exports.deleteUser = async (req, res, next) => {
 };
 
 module.exports.getUserListing = async (req, res, next) => {
-    console.log(req.user.id)
-    console.log(req.params.id)
+  console.log(req.user.id);
+  console.log(req.params.id);
   if (req.user.id === req.params.id) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });
-      if(!listings) res.send("Listing not Present");
-    
-      res.status(200).json(listings)
-      
+      if (!listings) res.send("Listing not Present");
+
+      res.status(200).json(listings);
     } catch (error) {
       next(error);
     }
   } else {
     return next(errorHandler(401, "You can only view your own listings!"));
+  }
+};
+
+module.exports.getUserData = async (req, res, next) => {
+  try {
+    let userData = await Users.find({ _id: req.params.id });
+    if (!userData) return next(errorHandler(404, "User not found"));
+    const { password,  ...rest } = userData[0]._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
   }
 };

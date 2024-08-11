@@ -8,7 +8,7 @@ const AuthProvider = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, loginWithRedirect, isAuthenticated } = useAuth0();
-
+    
   useEffect(() => {
     const handleLogin = async (user) => {
       try {
@@ -30,7 +30,7 @@ const AuthProvider = () => {
         console.log("Response data:", data);
 
         dispatch(signInSuccess(data));
-        navigate('/');
+        // navigate('/');
       } catch (error) {
         console.error("Error during login:", error.message);
       }
@@ -40,6 +40,7 @@ const AuthProvider = () => {
       handleLogin(user);
     }
   }, [isAuthenticated, user, dispatch, navigate]);
+   
 
  
 

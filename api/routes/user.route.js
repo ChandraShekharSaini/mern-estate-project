@@ -13,4 +13,6 @@ router.post("/update/:id", verifyUser, controller.postUpdateUser);
 
 router.delete("/delete/:id", verifyUser, controller.deleteUser);
 router.get('/listing/:id', verifyUser, controller.getUserListing);
+
+router.get('/get/:id', verifyUser, controller.getUserData)
 module.exports = router;

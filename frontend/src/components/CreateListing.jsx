@@ -7,7 +7,7 @@ import {
 } from "firebase/storage";
 import app from "../Firebase";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -161,7 +161,7 @@ const CreateListing = () => {
         setError(data.message);
       }
 
-      navigate(`/listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -194,7 +194,7 @@ const CreateListing = () => {
               placeholder="Description"
               className="border p-3 rounded-lg"
               id="description"
-              maxLength="62"
+              maxLength="200"
               minLength="10"
               required
               onChange={handleChange}
@@ -325,7 +325,7 @@ const CreateListing = () => {
                   <p className="flex flex-row">
                     Regular price <span className="text-red-700">*</span>
                   </p>
-                  <span className="text-xs">(Rs / Month)</span>
+                   {formData.type==='rent' &&  <span className="text-xs">(Rs / Month)</span>}
                 </div>
               </div>
               {formData.offer && (
@@ -344,7 +344,7 @@ const CreateListing = () => {
                     <p className="flex flex-row">
                       Discounted price <span className="text-red-700">*</span>
                     </p>
-                    <span className="text-xs">(Rs / Month)</span>
+                    {formData.type==='rent' &&  <span className="text-xs">(Rs / Month)</span>}
                   </div>
                 </div>
               )}
@@ -408,7 +408,10 @@ const CreateListing = () => {
                   </div>
                 );
               })}
-            <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+            <button
+              disabled={loading || uploading}
+              className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            >
               {loading ? "Loading..." : "Create Listing"}
             </button>
 

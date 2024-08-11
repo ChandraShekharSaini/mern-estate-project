@@ -219,7 +219,7 @@ const UpdateListing = () => {
               placeholder="Name"
               className="border p-3 rounded-lg"
               id="name"
-              maxLength="62"
+              maxLength="1000"
               minLength="10"
               required
               onChange={handleChange}
@@ -230,7 +230,7 @@ const UpdateListing = () => {
               placeholder="Description"
               className="border p-3 rounded-lg"
               id="description"
-              maxLength="62"
+              maxLength="1000"
               minLength="10"
               required
               onChange={handleChange}
@@ -361,7 +361,7 @@ const UpdateListing = () => {
                   <p className="flex flex-row">
                     Regular price <span className="text-red-700">*</span>
                   </p>
-                  <span className="text-xs">(Rs / Month)</span>
+                  {formData.type==='rent' &&  <span className="text-xs">(Rs / Month)</span>}
                 </div>
               </div>
               {formData.offer && (
@@ -380,7 +380,7 @@ const UpdateListing = () => {
                     <p className="flex flex-row">
                       Discounted price <span className="text-red-700">*</span>
                     </p>
-                    <span className="text-xs">(Rs / Month)</span>
+                    {formData.type==='rent' &&  <span className="text-xs">(Rs / Month)</span>}
                   </div>
                 </div>
               )}
