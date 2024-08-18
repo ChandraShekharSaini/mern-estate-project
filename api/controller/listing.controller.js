@@ -3,7 +3,7 @@ const errorHandler = require("../utilis/error.js");
 
 module.exports.createListing = async (req, res, next) => {
   console.log("I am in Listing");
-  console.log(req.body);
+  
   try {
     const listing = await Listing.create(req.body);
     return res.status(201).json(listing);
@@ -29,14 +29,14 @@ module.exports.deleteListing = async (req, res, next) => {
 };
 
 module.exports.updateListing = async (req, res, next) => {
-  console.log(req.params.id);
+
   let listing = await Listing.findById({ _id: req.params.id });
 
   if (!listing) return next(errorHandler(401, "Listig not found"));
 
-  if (req.user.id !== listing.userRef) {
-    return next(errorHandler(401, "You can onlt update your own listing"));
-  }
+  // if (req.user.id !== listing.userRef) {
+  //   return next(errorHandler(401, "You can onlt update your own listing"));
+  // }
 
   try {
     const updateListing = await Listing.findByIdAndUpdate(

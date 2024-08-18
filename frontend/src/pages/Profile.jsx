@@ -95,6 +95,7 @@ const Profile = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log("Profile data",data);
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
         return;

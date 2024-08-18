@@ -9,10 +9,10 @@ const verifyUser = require("../utilis/verifyuser");
 router.get("/", controller.getUser);
 
 
-router.post("/update/:id", verifyUser, controller.postUpdateUser);
+router.post("/update/:id", controller.postUpdateUser);
 
-router.delete("/delete/:id", verifyUser, controller.deleteUser);
-router.get('/listing/:id', verifyUser, controller.getUserListing);
+router.delete("/delete/:id", controller.deleteUser);
+router.get('/listing/:id', controller.getUserListing);
 
-router.get('/get/:id', verifyUser, controller.getUserData)
+router.get('/get/:id', controller.getUserData)
 module.exports = router;

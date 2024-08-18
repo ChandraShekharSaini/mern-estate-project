@@ -1,15 +1,14 @@
 
 const express = require('express');
-const PORT= process.env.PORT ||4444;
+const PORT=4444;
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const path = require('path')
-const { dirname } = require('path');
 require('dotenv').config()
 
 
 
-mongoose.connect(process.env.MONGO)
+mongoose.connect("mongodb://127.0.0.1:27017/mern-booking")
 .then(()=>{
     console.log("Connected to DB")
     
@@ -18,7 +17,7 @@ mongoose.connect(process.env.MONGO)
     console.log(error)
 })
 
-// const __dirname = path.resolve();
+
 
 
 const app = express();
@@ -40,11 +39,7 @@ app.use('/api/auth',require('./routes/auth.route.js'))
 app.use('/api/listing',require('./routes/listing.route.js'));
 
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-})
 
 app.use((err,req,res,next)=>{
     const statusCode=err.statusCode||500;
