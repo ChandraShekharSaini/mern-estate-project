@@ -183,7 +183,7 @@ const CreateListing = () => {
               placeholder="Name"
               className="border p-3 rounded-lg"
               id="name"
-              maxLength="62"
+              maxLength="100"
               minLength="10"
               required
               onChange={handleChange}
@@ -194,8 +194,8 @@ const CreateListing = () => {
               placeholder="Description"
               className="border p-3 rounded-lg"
               id="description"
-              maxLength="200"
-              minLength="10"
+              maxLength="100000000"
+              minLength="100"
               required
               onChange={handleChange}
               value={formData.description}
@@ -206,6 +206,8 @@ const CreateListing = () => {
               className="border p-3 rounded-lg"
               id="address"
               required
+              maxLength="100000000"
+          
               onChange={handleChange}
               value={formData.address}
             />

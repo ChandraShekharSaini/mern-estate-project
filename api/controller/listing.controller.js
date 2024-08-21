@@ -66,6 +66,7 @@ module.exports.getListing = async (req, res, next) => {
 };
 
 module.exports.getListings = async (req, res, next) => {
+  // console.log("Limit",req.query.limit);
   try {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
@@ -109,6 +110,8 @@ module.exports.getListings = async (req, res, next) => {
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
+
+      res.status(200).json(listings);
 
     return res.status(200).json(listings);
   } catch (error) {
