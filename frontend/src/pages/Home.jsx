@@ -50,7 +50,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="-z-10">
       {/* top */}
 
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">

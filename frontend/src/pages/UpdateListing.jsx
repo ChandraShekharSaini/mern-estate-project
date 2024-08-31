@@ -205,13 +205,13 @@ const UpdateListing = () => {
   };
 
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <main className="p-3 max-w-4xl mx-auto my-60px">
       <div>
         <h1 className="text-3xl font-semibold text-center">Update Listing</h1>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-4 my-5"
         >
           <div className="flex flex-col gap-4 flex-1">
             <input
@@ -429,7 +429,7 @@ const UpdateListing = () => {
                     <img
                       src={urls}
                       key={index}
-                      className="rounded-sm brightness-75 w-3/5 object-contain"
+                      className="rounded-sm brightness-75 w-3/5  h-28 object-cover"
                     />
 
                     <button

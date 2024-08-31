@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="py-20 px-4 max-w-6xl mx-auto">
+    <div className="py-20 px-4 max-w-6xl mx-auto my-40px">
       <h1 className="text-3xl font-bold m-4 text-slate-800">
         About Booking.Com Estate
       </h1>

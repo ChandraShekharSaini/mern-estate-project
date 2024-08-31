@@ -9,13 +9,19 @@ export default {
     
     extend: {
       scale:{
-       110:'0.9'
+       110:'0.9',
+       111:'1.5'
       },
 
       spacing: {
       //   '127':'7rem',
       //  '128':'10rem',
-
+       
+      '40px': '60px',
+      '60px':'80px',
+      '85px':'81px',
+      '90px':'90px',
+     
 
        '127':'9rem',
        '128':'12rem',
@@ -28,5 +34,5 @@ export default {
      
     },
   },
-  plugins: [],
+  plugins: [ require('tailwindcss-border-gradients'),],
 }

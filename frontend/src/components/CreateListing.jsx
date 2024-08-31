@@ -169,7 +169,7 @@ const CreateListing = () => {
   };
 
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <main className="p-3 max-w-4xl mx-auto my-60px">
       <div>
         <h1 className="text-3xl font-semibold text-center">Create a Listing</h1>
 
@@ -177,7 +177,7 @@ const CreateListing = () => {
           onSubmit={handleSubmit}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <div className="flex flex-col gap-4 flex-1">
+          <div className="flex flex-col gap-4 flex-1 my-5">
             <input
               type="text"
               placeholder="Name"
@@ -353,7 +353,7 @@ const CreateListing = () => {
             </div>
           </div>
 
-          <div className="flex flex-col flex-1 gap-4">
+          <div className="flex flex-col flex-1 gap-4 my-5">
             <p className="font-bold">
               Images<span className="text-red-700">*</span>:
               <span className="font-semibold text-gray-600 ml-2">
@@ -395,7 +395,7 @@ const CreateListing = () => {
                     <img
                       src={urls}
                       key={index}
-                      className="rounded-sm brightness-75 w-3/5 object-contain "
+                      className="rounded-sm brightness-75 w-3/5 h-28 object-cover"
                     />
 
                     <button

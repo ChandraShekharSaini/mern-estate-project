@@ -63,7 +63,7 @@ const Listing = () => {
   }, []);
 
   return (
-    <main>
+    <main  className="my-85px">
       {loadingEffect && (
         <p className="h-screen bg-gray-500 flex items-center justify-center    text-center text-2xl text-white">
           Loading...
@@ -106,7 +106,7 @@ const Listing = () => {
           )}
           <div className="flex flex-col max-w-4xl mx-auto p-3 gap-4">
             <p className="text-2xl font-semibold">
-              {listingData.name} - Rs{""}
+              {listingData.name} - Rs{" "}
               {listingData.offer
                 ? listingData.discountPrice.toLocaleString("en-IN")
                 : listingData.regularPrice.toLocaleString("en-IN")}
