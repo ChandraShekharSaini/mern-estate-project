@@ -6,7 +6,6 @@ import { persistor, store } from "./redux/store.js";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Auth0Provider } from "@auth0/auth0-react";
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Auth0Provider
     domain="dev-mluhsyj60jpe2q6p.us.auth0.com"

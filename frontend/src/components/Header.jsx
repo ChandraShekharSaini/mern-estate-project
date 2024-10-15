@@ -47,12 +47,12 @@ const Header = () => {
           
         <ul className=" text-white flex items-start gap-4">
           <Link to="/">
-            <li className="hidden sm:inline text-lg font-bold hover:text-blue-600 cursor-pointer">
+            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-lg font-bold hover:text-blue-600 cursor-pointer">
+            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
               About
             </li>
           </Link>
@@ -80,7 +80,7 @@ const Header = () => {
                 alt="profile_image"
               />
             ) : (
-              <li className="text-lg font-bold hover:text-blue-600 cursor-pointer">
+              <li className="text-lg font-bold hover:text-red-600 cursor-pointer list-none">
                 Sign in
               </li>
             )}

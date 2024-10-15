@@ -2,6 +2,8 @@ const Users = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const errorHandler = require("../utilis/error.js");
+const Mailer = require('../Nodemailer/nodemailerSignup.js')
+const LoginMailer = require('../Nodemailer/LoginNodeMailer.js')
 // const { maxHeaderSize } = require("http");
 
 module.exports.postSignup = async (req, res, next) => {
@@ -12,6 +14,7 @@ module.exports.postSignup = async (req, res, next) => {
 
   try {
     await newUser.save();
+    Mailer(newUser);
     res.status(201).json("User created successfully!");
   } catch (error) {
     console.log(error);
@@ -29,6 +32,8 @@ module.exports.getSignin = async (req, res, next) => {
     if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
     const token = jwt.sign({ id: validUser._id }, "klnkjlnkjnkjnk");
     const { password: pass, ...rest } = validUser._doc;
+
+    LoginMailer(rest)
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
@@ -47,6 +52,7 @@ module.exports.postGoogleIn = async (req, res, next) => {
     if (user) {
       const token = jwt.sign({ id: user._id }, "klnkjlnkjnkjnk");
       const { password: pass, ...rest } = user._doc;
+      LoginMailer(rest);
       res
         .cookie("access_token", token, { httpOnly: true })
         .status(200)
@@ -66,7 +72,8 @@ module.exports.postGoogleIn = async (req, res, next) => {
       });
       console.log("newUser", newUser);
       await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, "klnkjlnkjnkjnk" );
+      LoginMailer(newUser);
+      const token = jwt.sign({ id: newUser._id }, "klnkjlnkjnkjnk");
       const { password: pass, ...rest } = newUser._doc;
       res
         .cookie("access_token", token, { httpOnly: true })
