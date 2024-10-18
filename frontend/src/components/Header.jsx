@@ -28,12 +28,12 @@ const Header = () => {
 
   console.log('currentUer', currentUser);
   return (
-    <header className="bg-slate-300 fixed top-0 left-0 right-0  z-10 h-15">
+    <header className="bg-zinc-950 fixed top-0 left-0 right-0  z-10 h-15">
       <div className="flex justify-between  items-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl lg:text-2xl  flex flex-wrap">
             <span className='border-4 border-gradient-to-l from-white to-black p-1 rounded-sm'>
-              <span className="text-white">Heritage</span>  <span className="text-black-700">Estate</span>
+              <span className="text-white">Heritage</span>  <span className="text-orange-400">Estate</span>
             </span>
             
           </h1>
@@ -62,12 +62,12 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="bg-white  border rounded-lg focus:outline-none ml-9 w-20 sm:w-64 h-9"
+            className="bg-white text-lg border rounded-sm focus:outline-none ml-9 w-20 sm:w-64 h-9"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className='ml-3 w-lg text-red-700 hover:scale-111'>
-            <FaSearch className="text-slate-600" />
+          <button className='ml-3 text-lg text-red-700 hover:scale-111'>
+            <FaSearch className="text-white" />
           </button>
         </form>
 
