@@ -1,12 +1,12 @@
-const jwt = require('jsonwebtoken');
-const errorHandler = require('./error.js');
+import jwt from 'jsonwebtoken'
+import errorHandler from './error.js'
 
 const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
-   console.log(token);
+  console.log(token);
   if (!token) return next(errorHandler(401, 'Unauthorized'));
 
-  jwt.verify("klnkjlnkjnkjnk" ,(err, user) => {
+  jwt.verify(process.env.JWT_SECRET, (err, user) => {
     if (err) return next(errorHandler(403, 'Forbidden'));
 
     req.user = user;
@@ -14,4 +14,4 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = verifyToken;
+export default verifyToken;

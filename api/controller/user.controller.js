@@ -1,13 +1,13 @@
-const Users = require("../models/user.model");
-const Listing = require("../models/Listing.model");
-const errorHandler = require("../utilis/error");
-const bcrypt = require("bcryptjs");
+import Users from "../models/user.model.js"
+import Listing from "../models/Listing.model.js"
+import errorHandler from "../utilis/error.js"
+import bcrypt from "bcryptjs"
 
-module.exports.getUser = (req, res) => {
+export const getUser = (req, res) => {
   res.send("I am Lalu");
 };
 
-module.exports.postUpdateUser = async (req, res, next) => {
+export const postUpdateUser = async (req, res, next) => {
   console.log("InSide Post Update");
   // if (req.user.id !== req.params.id)
   //   return next(errorHandler(401, "You can only update your own account!"));
@@ -37,7 +37,7 @@ module.exports.postUpdateUser = async (req, res, next) => {
   }
 };
 
-module.exports.deleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
   // console.log("deleted");
   // console.log("deleted", req.user.id);
   // console.log("deleted", req.params.id);
@@ -52,7 +52,7 @@ module.exports.deleteUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUserListing = async (req, res, next) => {
+export const getUserListing = async (req, res, next) => {
   // console.log(req.user.id);
   console.log(req.params.id);
   if (true) {
@@ -69,11 +69,11 @@ module.exports.getUserListing = async (req, res, next) => {
   }
 };
 
-module.exports.getUserData = async (req, res, next) => {
+export const getUserData = async (req, res, next) => {
   try {
     let userData = await Users.find({ _id: req.params.id });
     if (!userData) return next(errorHandler(404, "User not found"));
-    const { password,  ...rest } = userData[0]._doc;
+    const { password, ...rest } = userData[0]._doc;
     res.status(200).json(rest);
   } catch (error) {
     next(error);

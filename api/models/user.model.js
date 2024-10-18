@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+import mongoose, { Schema } from "mongoose"
+
 
 const userSchema = new Schema({
   username: {
     type: String,
     required: true,
-    
+
   },
   email: {
     type: String,
@@ -17,11 +17,11 @@ const userSchema = new Schema({
     required: true,
   },
 
-  avatar:{
+  avatar: {
     type: String,
     default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToTykU2BZtuaSIFXvPHnTJsaL-Z3NgRvA2sA&s'
   }
 
-},{timestamps:true});
+}, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

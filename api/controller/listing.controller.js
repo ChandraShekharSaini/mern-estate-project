@@ -1,9 +1,9 @@
-const Listing = require("../models/Listing.model.js");
-const errorHandler = require("../utilis/error.js");
+import Listing from "../models/Listing.model.js"
+import errorHandler from "../utilis/error.js"
 
-module.exports.createListing = async (req, res, next) => {
+export const createListing = async (req, res, next) => {
   console.log("I am in Listing");
-  
+
   try {
     const listing = await Listing.create(req.body);
     return res.status(201).json(listing);
@@ -13,7 +13,7 @@ module.exports.createListing = async (req, res, next) => {
   }
 };
 
-module.exports.deleteListing = async (req, res, next) => {
+export const deleteListing = async (req, res, next) => {
   let listing = await Listing.findOne({ _id: req.params.id });
   if (!listing) return next(errorHandler(401, "Listing is not exist"));
   if (listing._id.toString() !== req.params.id) {
@@ -28,7 +28,7 @@ module.exports.deleteListing = async (req, res, next) => {
   }
 };
 
-module.exports.updateListing = async (req, res, next) => {
+export const updateListing = async (req, res, next) => {
 
   let listing = await Listing.findById({ _id: req.params.id });
 
@@ -53,7 +53,7 @@ module.exports.updateListing = async (req, res, next) => {
   }
 };
 
-module.exports.getListing = async (req, res, next) => {
+export const getListing = async (req, res, next) => {
   console.log("inside---2");
   try {
     let listing = await Listing.findById({ _id: req.params.id });
@@ -65,7 +65,7 @@ module.exports.getListing = async (req, res, next) => {
   }
 };
 
-module.exports.getListings = async (req, res, next) => {
+export const getListings = async (req, res, next) => {
   // console.log("Limit",req.query.limit);
   try {
     const limit = parseInt(req.query.limit) || 9;
@@ -111,7 +111,7 @@ module.exports.getListings = async (req, res, next) => {
       .limit(limit)
       .skip(startIndex);
 
-      res.status(200).json(listings);
+    res.status(200).json(listings);
 
     return res.status(200).json(listings);
   } catch (error) {

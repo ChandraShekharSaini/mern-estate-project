@@ -1,5 +1,4 @@
-const nodemailer = require('nodemailer');
-// import errroHandler from '../utils/error.js'
+import nodemailer from 'nodemailer'
 
 const LoginMailer = (newData) => {
 
@@ -64,4 +63,4 @@ const LoginMailer = (newData) => {
 
 }
 
-module.exports = LoginMailer;
+export default LoginMailer;

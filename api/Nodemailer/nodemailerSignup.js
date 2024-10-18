@@ -1,31 +1,30 @@
-const nodemailer = require('nodemailer');
-// import errroHandler from '../utils/error.js'
+import nodemailer from 'nodemailer'
 
 const Mailer = (newData) => {
 
-    console.log("------------SendingMail--------------");
-    console.log("Mailer", newData)
+  console.log("------------SendingMail--------------");
+  console.log("Mailer", newData)
 
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // or 'STARTTLS'
-        auth: {
-            user: 'chandrashekharsaini322@gmail.com',
-            pass: 'volfdzdbyovzmlix'
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    })
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // or 'STARTTLS'
+    auth: {
+      user: 'chandrashekharsaini322@gmail.com',
+      pass: 'volfdzdbyovzmlix'
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  })
 
 
-    const mailUser = {
-        from: 'chandrashekharsaini322@gmail.com',
-        to: newData.email,
-        subject: "Welcome to Estate - Signup Successful!",
+  const mailUser = {
+    from: 'chandrashekharsaini322@gmail.com',
+    to: newData.email,
+    subject: "Welcome to Estate - Signup Successful!",
 
-        html: `
+    html: `
     <div style="font-family: Arial, sans-serif; color: #333; padding:15px 0;">
       <h2 style="color: #2e6da4; font-size: 24px;">Welcome to Heritage Estate!</h2>
       <p style="font-size: 16px;">Dear ${newData.username},</p>
@@ -51,19 +50,19 @@ const Mailer = (newData) => {
     </div>
   `,
 
-    }
+  }
 
-    const mailOption = transporter.sendMail(mailUser, (error, inof) => {
-        console.log("I am inof", inof)
-        if (error) {
-            // return next(errroHandler (400, "Error in Sending Mail"))
-            console.log(error)
-        }
-        else {
-            console.log("Mail Send Successfully")
-        }
-    })
+  const mailOption = transporter.sendMail(mailUser, (error, inof) => {
+    console.log("I am inof", inof)
+    if (error) {
+      // return next(errroHandler (400, "Error in Sending Mail"))
+      console.log(error)
+    }
+    else {
+      console.log("Mail Send Successfully")
+    }
+  })
 
 }
 
-module.exports = Mailer;
+export default Mailer;

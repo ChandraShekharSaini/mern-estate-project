@@ -1,21 +1,18 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
 
-const listingController = require("../controller/listing.controller");
+import { createListing, deleteListing, updateListing, getListing, getListings } from '../controller/listing.controller.js'
 
-const verifyUser = require("../utilis/verifyuser");
+import verifyUser from "../utilis/verifyuser.js"
 
-router.post("/create", listingController.createListing);
+router.post("/create", createListing);
 
+router.delete('/delete/:id', deleteListing);
 
-router.delete('/delete/:id',listingController.deleteListing);
+router.post('/update/:id', updateListing);
 
-console.log("updated")
+router.get('/get/:id', getListing);
 
-router.post('/update/:id',listingController.updateListing);
+router.get('/get', getListings);
 
-router.get('/get/:id',listingController.getListing );
-
-router.get('/get', listingController.getListings);
-
-module.exports = router;
+export default router

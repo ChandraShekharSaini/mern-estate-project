@@ -1,18 +1,17 @@
-const path = require("path");
-const express = require("express");
+import path from 'path'
+import express from 'express'
 const router = express.Router();
 
-const controller = require("../controller/user.controller");
+import { getUser, postUpdateUser, deleteUser, getUserListing, getUserData } from '../controller/user.controller.js'
 
-const verifyUser = require("../utilis/verifyuser");
+router.get("/", getUser);
 
-router.get("/", controller.getUser);
+router.post("/update/:id", postUpdateUser);
 
+router.delete("/delete/:id", deleteUser);
 
-router.post("/update/:id", controller.postUpdateUser);
+router.get('/listing/:id', getUserListing);
 
-router.delete("/delete/:id", controller.deleteUser);
-router.get('/listing/:id', controller.getUserListing);
+router.get('/get/:id', getUserData)
 
-router.get('/get/:id', controller.getUserData)
-module.exports = router;
+export default router

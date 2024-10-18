@@ -1,9 +1,10 @@
-const express = require('express');
-const PORT = process.env.PORT || 4444;
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const path = require('path');
-require('dotenv').config();
+import express from 'express'
+import mongoose from 'mongoose'
+import cookieParser from 'cookie-parser'
+import path from 'path'
+
+
+const PORT = process.env.PORT || 4444
 
 mongoose
   .connect(process.env.MONGO)
@@ -27,9 +28,14 @@ app.listen(PORT, () => {
   console.log('http://localhost:' + PORT);
 });
 
-app.use('/api/user', require('./routes/user.route.js'));
-app.use('/api/auth', require('./routes/auth.route.js'));
-app.use('/api/listing', require('./routes/listing.route.js'));
+import authRouter from './routes/auth.route.js';
+import listingRouter from './routes/listing.route.js'
+import userRouter from './routes/user.route.js'
+
+
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter)
+app.use('/api/listing', listingRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

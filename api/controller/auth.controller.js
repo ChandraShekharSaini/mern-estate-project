@@ -1,12 +1,12 @@
-const Users = require("../models/user.model");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const errorHandler = require("../utilis/error.js");
-const Mailer = require('../Nodemailer/nodemailerSignup.js')
-const LoginMailer = require('../Nodemailer/LoginNodeMailer.js')
-// const { maxHeaderSize } = require("http");
+import Users from '../models/user.model.js'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import errorHandler from '../utilis/error.js';
+import LoginMailer from '../Nodemailer/LoginNodeMailer.js'
+import SignupMailer from '../Nodemailer/nodemailerSignup.js'
 
-module.exports.postSignup = async (req, res, next) => {
+
+export const postSignup = async (req, res, next) => {
   const { username, email, password } = req.body;
   console.log("i am here inside", password);
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -14,7 +14,7 @@ module.exports.postSignup = async (req, res, next) => {
 
   try {
     await newUser.save();
-    Mailer(newUser);
+    SignupMailer(newUser);
     res.status(201).json("User created successfully!");
   } catch (error) {
     console.log(error);
@@ -22,7 +22,7 @@ module.exports.postSignup = async (req, res, next) => {
   }
 };
 
-module.exports.getSignin = async (req, res, next) => {
+export const getSignin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const validUser = await Users.findOne({ email });
@@ -30,12 +30,13 @@ module.exports.getSignin = async (req, res, next) => {
     if (!validUser) return next(errorHandler(404, "User not found!"));
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
-    const token = jwt.sign({ id: validUser._id }, "klnkjlnkjnkjnk");
+    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
 
     LoginMailer(rest)
     res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, { httpOnly: true ,  maxAge: 2000 })
+
       .status(200)
       .json(rest);
   } catch (error) {
@@ -43,14 +44,14 @@ module.exports.getSignin = async (req, res, next) => {
   }
 };
 
-module.exports.postGoogleIn = async (req, res, next) => {
+export const postGoogleIn = async (req, res, next) => {
   console.log("google");
 
   try {
     const user = await Users.findOne({ email: req.body.email });
     console.log("user", user);
     if (user) {
-      const token = jwt.sign({ id: user._id }, "klnkjlnkjnkjnk");
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = user._doc;
       LoginMailer(rest);
       res
@@ -73,7 +74,7 @@ module.exports.postGoogleIn = async (req, res, next) => {
       console.log("newUser", newUser);
       await newUser.save();
       LoginMailer(newUser);
-      const token = jwt.sign({ id: newUser._id }, "klnkjlnkjnkjnk");
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = newUser._doc;
       res
         .cookie("access_token", token, { httpOnly: true })
@@ -85,7 +86,7 @@ module.exports.postGoogleIn = async (req, res, next) => {
   }
 };
 
-module.exports.signOut = async (req, res, next) => {
+export const signOut = async (req, res, next) => {
   console.log("signout");
   try {
     res.clearCookie('access_token');
@@ -94,3 +95,5 @@ module.exports.signOut = async (req, res, next) => {
     next(error);
   }
 };
+
+
