@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   getStorage,
   uploadBytesResumable,
@@ -100,6 +102,7 @@ const CreateListing = () => {
         return console.log(i), i !== index;
       }),
     });
+    toast.success("Image removed Succesfully")
   };
 
   const handleChange = (e) => {
@@ -137,8 +140,12 @@ const CreateListing = () => {
     e.preventDefault();
 
     try {
-      if (formData.imageUrls.length < 1)
-        return setError("You must upload one image");
+      if (formData.imageUrls.length < 1){
+        toast.info("You must upload one image")
+      console.log("tost",formData)
+       return  setError("You must upload one image");
+      }
+     
       if (+formData.regularPrice < +formData.discountPrice)
         return setError("Discount price must be lower than regular price");
       setLoading(true);
@@ -160,13 +167,21 @@ const CreateListing = () => {
       if (data.success == false) {
         setError(data.message);
       }
+    
 
-      navigate(`/listing/${data._id}`);
+     
+        navigate(`/listing/${data._id}`);
+     
+   
     } catch (error) {
       setError(error.message);
       setLoading(false);
     }
   };
+
+ 
+
+ 
 
   return (
     <main className="p-3 max-w-4xl mx-auto my-60px">
@@ -411,16 +426,18 @@ const CreateListing = () => {
                 );
               })}
             <button
+     
               disabled={loading || uploading}
               className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
             >
               {loading ? "Loading..." : "Create Listing"}
             </button>
-
+    
             {error && <p className="text-red-700 text-lg">{error}</p>}
           </div>
         </form>
       </div>
+      <ToastContainer theme="dark" position="bottom-right"/>
     </main>
   );
 };

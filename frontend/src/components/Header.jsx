@@ -57,6 +57,18 @@ const Header = () => {
             </li>
           </Link>
 
+          <Link to="/blog">
+            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+              Blog
+            </li>
+          </Link>
+
+          <Link to="/testimonail">
+            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+              Testimonial
+            </li>
+          </Link>
+
           </ul>
 
           <input
@@ -80,8 +92,8 @@ const Header = () => {
                 alt="profile_image"
               />
             ) : (
-              <li className="text-lg font-bold hover:text-red-600 cursor-pointer list-none">
-                Sign in
+              <li className="text-lg font-bold text-white hover:text-red-700 cursor-pointer list-none">
+                Sign In
               </li>
             )}
           </Link>

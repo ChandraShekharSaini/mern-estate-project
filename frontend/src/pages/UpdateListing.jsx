@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Notification from "../Notification/Notification";
 import {
   getStorage,
   uploadBytesResumable,
@@ -8,6 +10,7 @@ import {
 import app from "../Firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+
 
 const UpdateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -204,13 +207,20 @@ const UpdateListing = () => {
     }
   };
 
+
+    const handleUpdate = (e)=>{
+            e.preventDefault()
+       toast.warn("Update Successfully")
+    }
+
   return (
     <main className="p-3 max-w-4xl mx-auto my-60px">
       <div>
         <h1 className="text-3xl font-semibold text-center">Update Listing</h1>
-
+        <Notification/>
         <form
           onSubmit={handleSubmit}
+          onSubmi={handleUpdate}
           className="flex flex-col sm:flex-row gap-4 my-5"
         >
           <div className="flex flex-col gap-4 flex-1">
@@ -445,6 +455,7 @@ const UpdateListing = () => {
                 );
               })}
             <button
+              onClick={handleUpdate}
               disabled={loading || uploading}
               className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
             >
@@ -455,6 +466,8 @@ const UpdateListing = () => {
           </div>
         </form>
       </div>
+    x
+    
     </main>
   );
 };

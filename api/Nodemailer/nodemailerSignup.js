@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 
 const Mailer = (newData) => {
 
-  console.log("------------SendingMail--------------");
+  console.log("------------SendingSignUpMail--------------");
   console.log("Mailer", newData)
 
   const transporter = nodemailer.createTransport({

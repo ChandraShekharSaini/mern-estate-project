@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   getDownloadURL,
@@ -100,7 +102,8 @@ const Profile = () => {
         dispatch(updateUserFailure(data.message));
         return;
       }
-
+       
+      toast.success("Update Succesfully")
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
@@ -342,6 +345,7 @@ const Profile = () => {
           ))}
         </div>
       )}
+      <ToastContainer position="bottom-right" theme="dark"/>
     </div>
   );
 };
