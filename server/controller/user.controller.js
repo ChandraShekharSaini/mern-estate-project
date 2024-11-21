@@ -3,12 +3,9 @@ import Listing from "../models/Listing.model.js"
 import errorHandler from "../utilis/error.js"
 import bcrypt from "bcryptjs"
 
-export const getUser = (req, res) => {
-  res.send("I am Lalu");
-};
 
 export const postUpdateUser = async (req, res, next) => {
-  console.log("InSide Post Update");
+ 
   // if (req.user.id !== req.params.id)
   //   return next(errorHandler(401, "You can only update your own account!"));
   try {
@@ -54,7 +51,7 @@ export const deleteUser = async (req, res, next) => {
 
 export const getUserListing = async (req, res, next) => {
   // console.log(req.user.id);
-  console.log(req.params.id);
+ 
   if (true) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });

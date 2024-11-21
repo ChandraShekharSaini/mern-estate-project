@@ -14,7 +14,7 @@ const AuthProvider = () => {
       try {
         console.log("User details:", user);
 
-        const res = await fetch("api/auth/google", {
+        const res = await fetch("http://localhost:4444/api/auth/google", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

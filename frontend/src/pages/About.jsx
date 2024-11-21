@@ -129,11 +129,11 @@ function App() {
             <div className="flex flex-col md:flex-row justify-center gap-8">
               <a href="tel:+1234567890" className="flex items-center justify-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
                 <Phone className="w-5 h-5" />
-                (123) 456-7890
+                +91 8445680548
               </a>
               <a href="mailto:contact@estate.com" className="flex items-center justify-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
                 <Mail className="w-5 h-5" />
-                contact@estate.com
+                chandrashekharsaini322@estate.com
               </a>
             </div>
           </div>

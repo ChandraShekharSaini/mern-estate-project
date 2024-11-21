@@ -67,9 +67,9 @@ function App() {
           <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Leadership</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'Sarah Johnson', role: 'CEO & Founder', experience: '20+ years in luxury real estate' },
-              { name: 'Michael Chen', role: 'Chief Operations Officer', experience: '15+ years in property development' },
-              { name: 'Emma Rodriguez', role: 'Head of Sales', experience: '12+ years in real estate marketing' }
+              { name: 'Chandra Shekhar', role: 'CEO & Founder', experience: '20+ years in luxury real estate' },
+              { name: 'Abishhek Yadav', role: 'Chief Operations Officer', experience: '15+ years in property development' },
+              { name: 'Rahul kumar', role: 'Head of Sales', experience: '12+ years in real estate marketing' }
             ].map((member) => (
               <div key={member.name} className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl">
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">{member.name}</h3>

@@ -14,12 +14,12 @@ const Home = () => {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   console.log(offerListings);
-  SwiperCore.use([Navigation]);
+  // SwiperCore.use([Navigation]);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?offer=true&limit=4");
+        const res = await fetch("http://localhost:4444/api/listing/get?offer=true&limit=4");
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
@@ -30,7 +30,7 @@ const Home = () => {
 
     const fetchRentListings = async () => {
       try {
-        const res = await fetch(`/api/listing/get?type=rent&limit=4`);
+        const res = await fetch(`http://localhost:4444/api/listing/get?type=rent&limit=4`);
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
@@ -41,7 +41,7 @@ const Home = () => {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch(`/api/listing/get?type=sale&linit=4`);
+        const res = await fetch(`http://localhost:4444/api/listing/get?type=sale&limit=4`);
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
@@ -67,7 +67,7 @@ const Home = () => {
        
         </h1>
 
-        <h1>akjnksjcsk</h1>
+        
 
         <div className="text-gray-400 text-xs sm:text-sm">
           Booking Estate is best place to find your next perfect place to live.

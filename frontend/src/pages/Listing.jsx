@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import PayPal from '../Paypal.jsx'
 import {
   FaMapMarkedAlt,
   FaShare,
@@ -29,10 +30,10 @@ const Listing = () => {
   useEffect(() => {
     const fetchListingData = async () => {
       const listing = params.listingId;
-
+    
       try {
         setLoadingEffect(true);
-        let res = await fetch(`/api/listing/get/${listing}`, {
+        let res = await fetch(`http://localhost:4444/api/listing/get/${listing}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -104,7 +105,7 @@ const Listing = () => {
               Link Copied
             </p>
           )}
-          <div className="flex flex-col max-w-4xl mx-auto p-3 gap-4">
+          <div className="flex flex-col max-w-4xl mx-auto p-3 gap-5">
             <p className="text-2xl font-semibold">
               {listingData.name} - Rs{" "}
               {listingData.offer
@@ -127,7 +128,9 @@ const Listing = () => {
                    Rs {+listingData.regularPrice - +listingData.discountPrice}
                 </p>
               )}
+             
             </div>
+          
             <p className="text-slate-800">
               <span className="font-semibold text-black">Description - </span>
               {listingData.description}
@@ -159,6 +162,9 @@ const Listing = () => {
               </li>
             </ul>
 
+           {currentUser &&  <PayPal className="z-[-90]"/>}
+          
+                
             {currentUser &&
               currentUser._id == listingData.userRef &&
               !contact && (
