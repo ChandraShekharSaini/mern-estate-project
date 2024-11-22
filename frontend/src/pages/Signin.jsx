@@ -25,7 +25,7 @@ const Signin = () => {
       dispatch(signInStart());
         method: "POST",
         headers: {
-      const res = await fetch( `https://mern-estate-project-2-5d8i.onrender.com/api/auth/signin", 
+      const res = await fetch( `https://mern-estate-project-2-5d8i.onrender.com/api/auth/signin`, 
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
