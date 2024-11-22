@@ -1,15 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {signInStart,signInSuccess, signInFailure,} from '../redux/user/userSlice';
+import { signInStart, signInSuccess, signInFailure, } from '../redux/user/userSlice';
 // import OAuth from "../components/OAuth"
 import AuthProvider from "../components/AuthProvider"
 
 
 const Signin = () => {
   const [formData, setFormData] = useState({});
-  const{loading,error} = useSelector((state) => state.user)
-  
+  const { loading, error } = useSelector((state) => state.user)
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -23,9 +23,9 @@ const Signin = () => {
     ev.preventDefault();
     try {
       dispatch(signInStart());
+      const res = await fetch("https://mern-estate-project-2-5d8i.onrender.com/api/auth/signin", {
         method: "POST",
         headers: {
-      const res = await fetch( `https://mern-estate-project-2-5d8i.onrender.com/api/auth/signin`, 
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
@@ -77,8 +77,8 @@ const Signin = () => {
         >
           {loading ? "Loading....." : "Sign In"}
         </button>
-       {/* <OAuth/> */}
-       <AuthProvider />
+        {/* <OAuth/> */}
+        <AuthProvider />
       </form>
       <div className="flex items-center gap-4 mt-5">
         <p>Dont have account ?</p>
