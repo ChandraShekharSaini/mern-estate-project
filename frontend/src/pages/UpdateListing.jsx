@@ -182,7 +182,7 @@ const UpdateListing = () => {
 
       const listing = params.listingId;
 
-      let res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/listing/update/${listing}`, {
+      let res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/listing/update/${listing}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
