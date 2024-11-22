@@ -128,7 +128,7 @@ const Profile = () => {
       dispatch(deleteUserFailure(error.message));
     }
   };
-
+    
   const HandleSingnOut = async () => {
     console.log("signout Id", currentUser._id);
     logout({logoutParams: { returnTo: window.location.origin}});
@@ -151,6 +151,7 @@ const Profile = () => {
       dispatch(signOutUserFailure(error.message));
     }
   };
+  
 
   const handleShowListing = async () => {
     try {
