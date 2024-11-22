@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth0 } from "@auth0/auth0-react";
+
 import {
   getDownloadURL,
   getStorage,
@@ -131,9 +131,6 @@ const Profile = () => {
     
   const HandleSingnOut = async () => {
     console.log("signout Id", currentUser._id);
-    logout({logoutParams: { returnTo: window.location.origin}});
-    const isAuthenticated = false;
-    const user = null;
     try {
       dispatch(signOutUserStart());
       const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/auth/signout/${currentUser._id}`, {
