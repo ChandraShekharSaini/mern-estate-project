@@ -33,7 +33,6 @@ import { Link } from "react-router-dom"
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { logout } = useAuth0();
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -43,7 +42,7 @@ const Profile = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [ListingError, setListingError] = useState(false);
   const [userListing, setuserListing] = useState({});
-  const { isAuthenticated, user } = useAuth0();
+  
   console.log(file);
   console.log(filePerc);
   console.log(formData);
@@ -146,6 +145,7 @@ const Profile = () => {
       dispatch(signOutUserSuccess(data));
     } catch (error) {
       dispatch(signOutUserFailure(error.message));
+  
     }
   };
   
