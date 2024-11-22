@@ -5,14 +5,21 @@ import { signInSuccess } from '../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const OAuth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const handleGoogleClick = async () => {
+
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        signInWithRedirect(auth, provider);
 
         try {
 
-            const result = await getRedirectResult(auth);  // Correct way to get the redirect result
+            const result = await getRedirectResult(auth);
+            console.log(auth)
             if (result) {
                 const user = result.user;
                 console.log('Signed in user:', user);
