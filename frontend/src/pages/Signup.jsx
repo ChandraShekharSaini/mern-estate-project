@@ -3,8 +3,8 @@ import { useState } from "react";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import OAuth from '../components/OAuth'
-import AuthProvider from '../components/AuthProvider'
+import OAuth from '../components/OAuth'
+// import AuthProvider from '../components/AuthProvider'
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -89,8 +89,8 @@ const Signup = () => {
         >
           {loading ? "Loading....." : "Sign Up"}
         </button>
-        {/* <OAuth/> */}
-        <AuthProvider />
+        <OAuth/>
+        {/* <AuthProvider /> */}
       </form>
       <div className="flex items-center gap-4 mt-5">
         <p>Have an account ?</p>
