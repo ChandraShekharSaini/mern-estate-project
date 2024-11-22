@@ -151,7 +151,7 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
 
-      let res = await fetch("http://localhost:4444/api/listing/create", {
+      let res = await fetch("https://mern-estate-project-2-5d8i.onrender.com/api/listing/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
