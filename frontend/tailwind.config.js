@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import borderGradients from 'tailwindcss-border-gradients';
 export default {
   content: [
     "./index.html",
@@ -38,5 +39,5 @@ export default {
      
     },
   },
-  plugins: [ require('tailwindcss-border-gradients'),],
+  plugins: [borderGradients],
 }
