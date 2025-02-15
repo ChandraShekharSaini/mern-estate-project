@@ -4,7 +4,7 @@ const OAuth = () => {
 
   const handleGoogleClick = () => {
 
-    window.location.href = "http://localhost:4444/auth/google"
+    window.location.href = "https://mern-estate-project-tles.onrender.com/auth/google"
   }
 
 
