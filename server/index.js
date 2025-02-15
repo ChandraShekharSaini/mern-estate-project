@@ -34,11 +34,11 @@ app.get('/auth/google',
   ));
 
 app.get('/auth/google/callback',
-  googlePassport.authenticate('google', { failureRedirect: 'http://localhost:5173/sign-in', session: false }),
+  googlePassport.authenticate('google', { failureRedirect: 'https://mern-estate-project-tles.onrender.com/sign-in', session: false }),
   function (req, res) {
 
     const token = jwt.sign({ user: req.user }, "jhggyytftyfmm", { expiresIn: '1h' });
-    res.status(200).redirect(`http://localhost:5173/redirect-to-home?user=${encodeURIComponent(JSON.stringify(token))}`);
+    res.status(200).redirect(`https://mern-estate-project-tles.onrender.com/redirect-to-home?user=${encodeURIComponent(JSON.stringify(token))}`);
 
   });
 
