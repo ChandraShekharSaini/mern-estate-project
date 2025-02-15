@@ -26,8 +26,8 @@ const Signup = () => {
     try {
       setLoading(true);
     
-      // https://mern-estate-project-2-5d8i.onrender.com
-      const res = await fetch("http://localhost:4444/api/auth/signup", {
+
+      const res = await fetch("https://mern-estate-project-tles.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

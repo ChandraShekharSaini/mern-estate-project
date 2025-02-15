@@ -79,7 +79,7 @@ const UpdateListing = () => {
 
     const fetchlisting = async () => {
       try {
-        let listing1 = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/listing/get/${listing}`, {
+        let listing1 = await fetch(`https://mern-estate-project-tles.onrender.com/api/listing/get/${listing}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const UpdateListing = () => {
 
       const listing = params.listingId;
 
-      let res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/listing/update/${listing}`, {
+      let res = await fetch(`https://mern-estate-project-tles.onrender.com/api/listing/update/${listing}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
