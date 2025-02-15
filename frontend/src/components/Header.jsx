@@ -1,12 +1,16 @@
 import { FaSearch } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation;
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
+
+
+  if (location.pathname === "/redirect-to-home") return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +22,8 @@ const Header = () => {
     navigate(`/search?${searchQuery}`);
   };
 
+
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const searchTermURL = urlParams.get('searchTerm');
@@ -28,14 +34,14 @@ const Header = () => {
 
   console.log('currentUer', currentUser);
   return (
-    <header className="bg-zinc-950 z-40 fixed top-0 left-0 right-0  z-10 h-15">
+    <header className="bg-zinc-950 fixed top-0 left-0 right-0  z-10 h-15">
       <div className="flex justify-between  items-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl lg:text-2xl  flex flex-wrap">
             <span className='border-4 border-gradient-to-l from-white to-black p-1 rounded-sm'>
               <span className="text-white">Heritage</span>  <span className="text-orange-400">Estate</span>
             </span>
-            
+
           </h1>
         </Link>
 
@@ -44,30 +50,30 @@ const Header = () => {
           className="p-3 rounded-lg flex items-center"
         >
 
-          
-        <ul className=" text-white flex items-start gap-4">
-          <Link to="/">
-            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
-              Home
-            </li>
-          </Link>
-          <Link to="/about">
-            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
-              About
-            </li>
-          </Link>
 
-          <Link to="/blog">
-            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
-              Blog
-            </li>
-          </Link>
+          <ul className=" text-white flex items-start gap-4">
+            <Link to="/">
+              <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+                Home
+              </li>
+            </Link>
+            <Link to="/about">
+              <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+                About
+              </li>
+            </Link>
 
-          <Link to="/testimonail">
-            <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
-              Testimonial
-            </li>
-          </Link>
+            <Link to="/blog">
+              <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+                Blog
+              </li>
+            </Link>
+
+            <Link to="/testimonail">
+              <li className="hidden sm:inline text-lg font-bold hover:text-red-600 cursor-pointer">
+                Testimonial
+              </li>
+            </Link>
 
           </ul>
 
@@ -84,20 +90,20 @@ const Header = () => {
         </form>
 
 
-          <Link to="/profile">
-            {currentUser ? (
-              <img
-                className="rounded-full h-10 w-10 object-cover hover:scale-110"
-                src={currentUser.avatar}
-                alt="profile_image"
-              />
-            ) : (
-              <li className="text-lg font-bold text-white hover:text-red-700 cursor-pointer list-none">
-                Sign In
-              </li>
-            )}
-          </Link>
-      
+        <Link to="/profile">
+          {currentUser ? (
+            <img
+              className="rounded-full h-10 w-10 object-cover hover:scale-110"
+              src={currentUser.avatar}
+              alt="profile_image"
+            />
+          ) : (
+            <li className="text-lg font-bold text-white hover:text-red-700 cursor-pointer list-none">
+              Sign In
+            </li>
+          )}
+        </Link>
+
       </div>
     </header>
   );

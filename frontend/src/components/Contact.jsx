@@ -20,7 +20,7 @@ const Contact = ({ listingData }) => {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/user/get/${listingData.userRef}`, {
+        const res = await fetch(`http://localhost:4444/api/user/get/${listingData.userRef}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

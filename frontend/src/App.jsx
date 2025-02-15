@@ -12,6 +12,7 @@ import Listing from "./pages/Listing"
 import Search from './pages/Search';
 import Blog from './pages/Blog/Blog'
 import Testimonial from './pages/Testimonial'
+import WaitPage from "./components/WaitPageAuth"
 const App = () => {
   return (
       <BrowserRouter>
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path='/search' element={<Search />} />
+          <Route path='/redirect-to-home' element={<WaitPage />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/testimonail' element={<Testimonial/>} />
           <Route path='/listing/:listingId' element={<Listing />} />

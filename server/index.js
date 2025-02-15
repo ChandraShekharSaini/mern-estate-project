@@ -7,43 +7,42 @@ import userRouter from './routes/user.route.js'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 import dotenv from 'dotenv'
+import jwt from "jsonwebtoken"
 
-
-
-
-dotenv.config()
-
+const app = express();
 const PORT = process.env.PORT || 4444
+dotenv.config()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
 
-mongoose
-  .connect(process.env.MONGO)
-  .then(() => {
-    console.log('Connected to DB');
+}));
+app.use(cookieParser());
+const __dirname = path.resolve()
 
-  })
-  .catch((error) => {
-    console.log(error);
+
+
+import googlePassport from "./authentication/googleAuth.js"
+app.use(googlePassport.initialize())
+app.get('/auth/google',
+  googlePassport.authenticate('google', {
+    scope:
+      ['email', 'profile']
+  }
+  ));
+
+app.get('/auth/google/callback',
+  googlePassport.authenticate('google', { failureRedirect: 'http://localhost:5173/sign-in', session: false }),
+  function (req, res) {
+
+    const token = jwt.sign({ user: req.user }, "jhggyytftyfmm", { expiresIn: '1h' });
+    res.status(200).redirect(`http://localhost:5173/redirect-to-home?user=${encodeURIComponent(JSON.stringify(token))}`);
+
   });
 
 
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.use(cookieParser());
-
-app.use(express.urlencoded({ extended: true }));
-
-app.listen(PORT, () => {
-  console.log('http://localhost:' + PORT);
-});
-
-
-
-app.get('/', (req, res) => {
-  res.json("I am god")
-})
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter)
 app.use('/api/listing', listingRouter);
@@ -58,6 +57,29 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+})
+
+
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => {
+    console.log('Connected to DB');
+
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+
+
+app.listen(PORT, () => {
+  console.log('http://localhost:' + PORT);
 });
 
 

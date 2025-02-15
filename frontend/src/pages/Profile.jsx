@@ -88,7 +88,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4444/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const Profile = () => {
     console.log("urrentUser._id", currentUser._id);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4444/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -132,7 +132,7 @@ const Profile = () => {
     console.log("signout Id", currentUser._id);
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/auth/signout/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4444/api/auth/signout/${currentUser._id}`, {
         method: "GET",
       });
 
@@ -153,7 +153,7 @@ const Profile = () => {
   const handleShowListing = async () => {
     try {
       setListingError(false);
-      const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/user/listing/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4444/api/user/listing/${currentUser._id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -177,7 +177,7 @@ const Profile = () => {
   const handleListingDelete = async (listingId) => {
     console.log(listingId);
     try {
-      const res = await fetch(`https://mern-estate-project-2-5d8i.onrender.com/api/listing/delete/${listingId}`, {
+      const res = await fetch(`http://localhost:4444/api/listing/delete/${listingId}`, {
         method: "DELETE",
         methods: {
           "Content-Type": "application/json",

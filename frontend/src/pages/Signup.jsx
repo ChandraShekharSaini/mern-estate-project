@@ -25,8 +25,9 @@ const Signup = () => {
     ev.preventDefault();
     try {
       setLoading(true);
-        
-      const res = await fetch("https://mern-estate-project-2-5d8i.onrender.com/api/auth/signup", {
+    
+      // https://mern-estate-project-2-5d8i.onrender.com
+      const res = await fetch("http://localhost:4444/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
