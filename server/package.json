@@ -8,8 +8,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --env-file=.env server/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node server/index.js"
+    "build": "npm install",
+    "start": "node index.js"
   },
   "author": "ChandraShekharSaini",
   "license": "ISC",
