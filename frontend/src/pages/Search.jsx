@@ -51,7 +51,7 @@ const Search = () => {
         setShowMore(false);
         const searchQuery = urlParams.toString();
 
-        const res = await fetch(`https://mern-estate-project-tles.onrender.com/api/listing/get?${searchQuery}`);
+        const res = await fetch(`https://mern-estate-project-eta.vercel.app/api/listing/get?${searchQuery}`);
         console.log("jnbjnj")
         const data = await res.json();
         console.log(data)

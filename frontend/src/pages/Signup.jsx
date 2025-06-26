@@ -1,16 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import OAuth from '../components/OAuth'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import OAuth from "../components/OAuth";
 // import AuthProvider from '../components/AuthProvider'
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,19 +21,21 @@ const Signup = () => {
   };
 
   const handleSubmit = async (ev) => {
-       
     ev.preventDefault();
     try {
       setLoading(true);
-    
 
-      const res = await fetch("https://mern-estate-project-tles.onrender.com/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://mern-estate-project-eta.vercel.app/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: true,
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
@@ -44,10 +46,10 @@ const Signup = () => {
       }
       setLoading(false);
       setError(null);
-      toast.success("Successfully Sign Up")
-      setTimeout(()=>{
+      toast.success("Successfully Sign Up");
+      setTimeout(() => {
         navigate("/sign-in");
-      },1200)
+      }, 1200);
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -56,13 +58,13 @@ const Signup = () => {
 
   console.log(formData);
 
-  
-
   return (
     <div className="p-3 max-w-lg mx-auto my-40px">
-           < ToastContainer theme="colored" position="top-right"/>
-      <h1 className="text-3xl  text-red-600 text-center font-bold my-7">Sign Up</h1>
-      <form onSubmit={handleSubmit}  className="flex flex-col gap-4">
+      <ToastContainer theme="colored" position="top-right" />
+      <h1 className="text-3xl  text-red-600 text-center font-bold my-7">
+        Sign Up
+      </h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
           placeholder="username "
@@ -90,7 +92,7 @@ const Signup = () => {
         >
           {loading ? "Loading....." : "Sign Up"}
         </button>
-        <OAuth/>
+        <OAuth />
         {/* <AuthProvider /> */}
       </form>
       <div className="flex items-center gap-4 mt-5">

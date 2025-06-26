@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://mern-estate-project-nthk.vercel.app",
     credentials: true,
   })
 );
@@ -45,7 +45,7 @@ app.get(
     res
       .status(200)
       .redirect(
-        `https://mern-estate-project-tles.onrender.com/redirect-to-home?user=${encodeURIComponent(
+        `https://mern-estate-project-nthk.vercel.app/redirect-to-home?user=${encodeURIComponent(
           JSON.stringify(token)
         )}`
       );
