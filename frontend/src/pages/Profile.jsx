@@ -179,9 +179,10 @@ const Profile = () => {
     try {
       const res = await fetch(`https://mern-estate-project-eta.vercel.app/api/listing/delete/${listingId}`, {
         method: "DELETE",
-        methods: {
+        headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include"
       });
 
       const data = await res.json();

@@ -35,7 +35,7 @@ export const getSignin = async (req, res, next) => {
 
     LoginMailer(rest)
     res
-      .cookie("access_token", token, { httpOnly: true ,  maxAge: 2000 })
+      .cookie("access_token", token, { httpOnly: true ,  sameSite: "none", secure:true,  maxAge: 2000 })
 
       .status(200)
       .json(rest);
@@ -55,7 +55,7 @@ export const postGoogleIn = async (req, res, next) => {
       const { password: pass, ...rest } = user._doc;
       LoginMailer(rest);
       res
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, { httpOnly: true ,sameSite:"none" , secure:true })
         .status(200)
         .json(rest);
     } else {
