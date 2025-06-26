@@ -33,7 +33,7 @@ const Listing = () => {
     
       try {
         setLoadingEffect(true);
-        let res = await fetch(`https://mern-estate-project-tles.onrender.com/api/listing/get/${listing}`, {
+        let res = await fetch(`https://mern-estate-project-eta.vercel.app/api/listing/get/${listing}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
