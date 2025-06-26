@@ -47,7 +47,9 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter)
 app.use('/api/listing', listingRouter);
 
-
+app.get("/",(req,res,next)=>{
+  res.send("My Mern  Estate Project")
+})
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
