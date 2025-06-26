@@ -35,7 +35,7 @@ app.get(
 app.get(
   "/auth/google/callback",
   googlePassport.authenticate("google", {
-    failureRedirect: "https://mern-estate-project-tles.onrender.com/sign-in",
+    failureRedirect: "https://mern-estate-project-nthk.vercel.app/sign-in",
     session: false,
   }),
   function (req, res) {
